@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escallente's Portfolio</title>
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <!-- Replace Tailwind CSS version with one that supports dark mode class strategy -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Use class strategy for dark mode
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="font-sans antialiased text-gray-900 bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-white bg-opacity-95 dark:bg-gray-900 dark:bg-opacity-95 z-50 shadow-sm transition-colors duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Escall</div>
+            <nav class="hidden md:flex space-x-10">
+                <a href="#hero" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Home</a>
+                <a href="#projects" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Projects</a>
+                <a href="#skills" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Skills</a>
+                <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">About</a>
+                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 shadow-md transition-all duration-300">
+            <div class="container mx-auto px-6 py-3">
+                <div class="flex flex-col space-y-4">
+                    <a href="#hero" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Home</a>
+                    <a href="#projects" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Projects</a>
+                    <a href="#skills" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Skills</a>
+                    <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">About</a>
+                    <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-6 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">
+                        Hi, I'm <span class="text-indigo-600 dark:text-indigo-400">Escall</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-4">Full Stack Web Developer & Software Developer</h2>
+                    <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">Innovating systems, one line of code at a time</p>
+                    <div class="w-full md:w-4/5 mb-8">
+                        <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">"TURNING IDEAS INTO REALITY"</p>
+                    </div>
+                    <a href="#projects" class="inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-colors duration-300">View My Work</a>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <img src="img/programmer vector.png" alt="Programmer Vector" class="w-5/6 md:w-4/5 programmer-image drop-shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Projects</h2>
+            
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-indigo-200 dark:bg-indigo-900"></div>
+                
+                <!-- 2023 Project -->
+                <div class="relative mb-20">
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -mt-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-800">
+                            <span class="text-white font-semibold text-sm">23</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-8 md:mb-0">
+                            <div class="p-1 inline-block mb-2 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs font-bold rounded">2023</div>
+                            <h3 class="text-2xl font-bold mb-2">Pre-School Website</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">An interactive website designed for pre-schoolers with educational games and resources for parents.</p>
+                            <div class="flex flex-wrap md:justify-end gap-2 mb-4">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded text-sm">JavaScript</span>
+                                <span class="px-2 py-1 bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 rounded text-sm">HTML/CSS</span>
+                                <span class="px-2 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded text-sm">Responsive Design</span>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-1/2 md:pl-8">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div class="h-56 bg-gray-200 dark:bg-gray-600 overflow-hidden cursor-pointer project-image" data-img="img/preschool-web.png" data-alt="Pre-School Website">
+                                    <img src="img/preschool-web.png" alt="Pre-School Website" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-lg font-semibold mb-2">Key Features</h4>
+                                    <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300 mb-4">
+                                        <li>Interactive learning games</li>
+                                        <li>Parent resources portal</li>
+                                        <li>School events calendar</li>
+                                    </ul>
+                                    <div class="flex space-x-3">
+                                        <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-600 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors duration-300">
+                                            <i class="fab fa-github mr-2"></i>GitHub
+                                        </a>
+                                        <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors duration-300">
+                                            <i class="fas fa-external-link-alt mr-2"></i>Demo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2024 Project -->
+                <div class="relative mb-20">
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -mt-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-800">
+                            <span class="text-white font-semibold text-sm">24</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row-reverse items-center">
+                        <div class="md:w-1/2 md:pl-8 md:text-left mb-8 md:mb-0">
+                            <div class="p-1 inline-block mb-2 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs font-bold rounded">2024</div>
+                            <h3 class="text-2xl font-bold mb-2">Online Enrollment & Student Management System</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">A comprehensive platform for schools to manage student enrollment, records, and academic progress.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded text-sm">PHP</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded text-sm">MySQL</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded text-sm">Laravel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-1/2 md:pr-8">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div class="h-56 bg-gray-200 dark:bg-gray-600 overflow-hidden cursor-pointer project-image" data-img="img/onlineenrolmentsystem.png" data-alt="Student Management System">
+                                    <img src="img/onlineenrolmentsystem.png" alt="Student Management System" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-lg font-semibold mb-2">Key Features</h4>
+                                    <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300 mb-4">
+                                        <li>Online registration and enrollment</li>
+                                        <li>Student record management</li>
+                                        <li>Grade tracking and reporting</li>
+                                        <li>Classroom management</li>
+                                    </ul>
+                                    <div class="flex space-x-3">
+                                        <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-600 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors duration-300">
+                                            <i class="fab fa-github mr-2"></i>GitHub
+                                        </a>
+                                        <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors duration-300">
+                                            <i class="fas fa-external-link-alt mr-2"></i>Demo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2025 Project - QR Code Attendance -->
+                <div class="relative mb-20">
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -mt-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 dark:bg-indigo-500 flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-800">
+                            <span class="text-white font-semibold text-sm">25</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-8 md:mb-0">
+                            <div class="p-1 inline-block mb-2 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-xs font-bold rounded">2025</div>
+                            <h3 class="text-2xl font-bold mb-2">QR Code Digital Attendance System</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">An intelligent system for tracking attendance using dynamic QR codes with real-time reporting.</p>
+                            <div class="flex flex-wrap md:justify-end gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded text-sm">PHP</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded text-sm">JavaScript</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded text-sm">MySQL</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded text-sm">QR Technology</span>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-1/2 md:pl-8">
+                            <div class="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div class="h-56 bg-gray-200 dark:bg-gray-600 overflow-hidden cursor-pointer project-image" data-img="img/qr-code-system.png" data-alt="QR Attendance System">
+                                    <img src="img/qr-code-system.png" alt="QR Attendance System" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-6">
+                                    <h4 class="text-lg font-semibold mb-2">Key Features</h4>
+                                    <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300 mb-4">
+                                        <li>Dynamic QR code generation</li>
+                                        <li>Real-time attendance tracking</li>
+                                        <li>Automated attendance reporting system</li>
+                                        <li>Mobile app for scanning</li>
+                                    </ul>
+                                    <div class="flex space-x-3">
+                                        <a href="#" class="px-4 py-2 bg-gray-800 dark:bg-gray-600 text-white rounded hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors duration-300">
+                                            <i class="fab fa-github mr-2"></i>GitHub
+                                        </a>
+                                        <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors duration-300">
+                                            <i class="fas fa-external-link-alt mr-2"></i>Demo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Skills</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <!-- HTML -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-orange-500"><i class="fab fa-html5"></i></div>
+                    <h3 class="font-medium">HTML</h3>
+                </div>
+                
+                <!-- CSS -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-blue-500"><i class="fab fa-css3-alt"></i></div>
+                    <h3 class="font-medium">CSS</h3>
+                </div>
+                
+                <!-- JavaScript -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-yellow-500"><i class="fab fa-js"></i></div>
+                    <h3 class="font-medium">JavaScript</h3>
+                </div>
+                
+                <!-- PHP -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-purple-500"><i class="fab fa-php"></i></div>
+                    <h3 class="font-medium">PHP</h3>
+                </div>
+                
+                <!-- MySQL -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-blue-800"><i class="fas fa-database"></i></div>
+                    <h3 class="font-medium">MySQL</h3>
+                </div>
+                
+                <!-- Python -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-blue-600"><i class="fab fa-python"></i></div>
+                    <h3 class="font-medium">Python</h3>
+                </div>
+                
+                <!-- Tailwind CSS -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-teal-500"><i class="fab fa-css3"></i></div>
+                    <h3 class="font-medium">Tailwind CSS</h3>
+                </div>
+                
+                <!-- React -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-blue-400"><i class="fab fa-react"></i></div>
+                    <h3 class="font-medium">React</h3>
+                </div>
+                
+                <!-- Laravel -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-red-500"><i class="fab fa-laravel"></i></div>
+                    <h3 class="font-medium">Laravel</h3>
+                </div>
+                
+                <!-- Git -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-orange-600"><i class="fab fa-git-alt"></i></div>
+                    <h3 class="font-medium">Git</h3>
+                </div>
+                
+                <!-- GitHub -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-gray-800 dark:text-white"><i class="fab fa-github"></i></div>
+                    <h3 class="font-medium">GitHub</h3>
+                </div>
+                
+                <!-- Responsive Design -->
+                <div class="skill-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow text-center hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="text-4xl mb-3 text-indigo-500"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="font-medium">Responsive Design</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">About Me</h2>
+            <div class="flex flex-col md:flex-row md:space-x-10 items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="img/typing-nobg.png" alt="Programmer Vector" class="w-3/4 mx-auto programmer-image drop-shadow-2xl">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                        My journey in software development started with building SNES Pre-School, a learning platform tailored for young minds. This early project ignited my passion for creating systems that could make a difference.
+                    </p>
+                    <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">
+                        Over the years, I've evolved my skills to develop intelligent systems like a QR Attendance System that streamlined tracking processes.
+                    </p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">
+                        When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, and constantly learning to stay at the forefront of web and software development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Contact</h2>
+            <div class="flex flex-col md:flex-row md:space-x-10">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">Let's Connect</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">Thanks for checking out my portfolio! I'd love to hear from you about potential collaborations or opportunities.</p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">Feel free to reach out through my contact information or social media profiles.</p>
+                        <div class="mt-8">
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=escall.byte@gmail.com" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-colors duration-300">
+                                <i class="fas fa-envelope mr-2"></i>Email Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg h-full">
+                        <h3 class="text-xl font-bold mb-4">Connect With Me</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">Feel free to reach out through email or connect on social media.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-indigo-600 dark:text-indigo-400"></i>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300">escall.byte@gmail.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-indigo-600 dark:text-indigo-400"></i>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300">San Pedro City, Laguna, Philippines</span>
+                            </div>
+                            <div class="flex space-x-4 mt-6">
+                                <a href="https://github.com/Escall061920" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition-colors duration-300">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 flex items-center justify-center text-white transition-colors duration-300">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://www.facebook.com/joerenzescallente027" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-indigo-600 hover:bg-indigo-700 flex items-center justify-center text-white transition-colors duration-300">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="font-bold text-2xl text-white">Escall</p>
+                    <p>"TURNING IDEAS INTO REALITY"</p>
+                </div>
+                <div>
+                    <p>&copy; <span id="year"></span> Escall. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal/Lightbox -->
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-5xl max-h-full">
+            <img id="modal-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain">
+            <button id="close-modal" class="absolute top-2 right-2 text-white bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-700 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

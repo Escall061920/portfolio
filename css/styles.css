@@ -1,0 +1,59 @@
+/* Custom styles - keeping minimal since we're using Tailwind */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation for skill cards */
+.skill-card {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), 
+              opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skill-card.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Dark mode transition */
+.dark-mode-transition {
+  transition: all 0.3s ease;
+}
+
+/* Custom shadow for project cards on hover */
+.project-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+  transform: translateY(-8px);
+}
+
+/* Form input focus styles */
+.form-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+/* 3D effect for programmer image - with fixed animation, no hover effect */
+.programmer-image {
+  filter: drop-shadow(0 10px 8px rgba(99, 102, 241, 0.25)) 
+          drop-shadow(0 20px 15px rgba(99, 102, 241, 0.15));
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: float 8s ease-in-out infinite;
+  transform: translateZ(30px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateZ(30px);
+  }
+  50% {
+    transform: translateY(-12px) translateZ(30px);
+  }
+  100% {
+    transform: translateY(0px) translateZ(30px);
+  }
+} 
